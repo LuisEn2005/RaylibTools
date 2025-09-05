@@ -11,9 +11,8 @@ Color RandomColor(void) {
 
 // Button Struct Functions
 Button makeButton(Button *button, Vector4 bounds, Color _color) {
-  button->Bounds = (Rectangle){bounds.x - bounds.z / 2, bounds.y - bounds.w / 2,
-                               bounds.z, bounds.w};
-  button->color = _color;
+  setButtonBounds(button, bounds);
+  setButtonColor(button, _color);
   return *button;
 }
 
@@ -40,6 +39,8 @@ void drawTextButton(TextButton *tButton) {
 // General Button Functions
 Button setButtonBounds(Button *button, Vector4 bounds) {
   button->Bounds = (Rectangle){bounds.x, bounds.y, bounds.z, bounds.w};
+  button->Bounds.x -= button->Bounds.width / 2;
+  button->Bounds.y -= button->Bounds.height / 2;
   return *button;
 }
 
