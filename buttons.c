@@ -21,19 +21,35 @@ void drawButton(Button *button) {
 }
 
 // TextButton Struct Functions
-TextButton makeTextButton(Button *button, const char *text) {
+TextButton makeTextButton(Button *button, Text text) {
   TextButton tButton;
   tButton.button = *button;
-  tButton.text = text;
+  tButton.textButton = text;
+  tButton.textButton.textWidth =
+      MeasureText(tButton.textButton.text, tButton.textButton.fontSize);
   return tButton;
 }
-
+/*
+TextButton changeTextButton(TextButton *button, const char *newText) {
+  button->text = newText;
+  button->
+  return button;
+}
+*/
 void drawTextButton(TextButton *tButton) {
-  int textSize = MeasureText(tButton->text, 10);
-
   drawButton(&tButton->button);
-  DrawText(tButton->text, tButton->button.Bounds.x, tButton->button.Bounds.y,
-           10, WHITE);
+  DrawText(tButton->textButton.text, tButton->button.Bounds.x,
+           tButton->button.Bounds.y, tButton->textButton.fontSize,
+           tButton->textButton.textColor);
+}
+
+Text makeText(const char *text, int fontSize, Color color) {
+  Text objText;
+  objText.text = text;
+  objText.fontSize = fontSize;
+  objText.textWidth = MeasureText(text, fontSize);
+  objText.textColor = color;
+  return objText;
 }
 
 // General Button Functions

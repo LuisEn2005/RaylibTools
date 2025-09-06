@@ -12,14 +12,23 @@ typedef struct Button {
 Button makeButton(Button *, Vector4, Color);
 void drawButton(Button *);
 
+typedef struct Text {
+  const char *text;
+  int fontSize;
+  int textWidth;
+  Color textColor;
+} Text;
+
 typedef struct TextButton {
   Button button;
-  const char *text;
+  Text textButton;
 } TextButton;
 
-TextButton makeTextButton(Button *, const char *);
-TextButton changeTextButton(Button *, const char *);
+TextButton makeTextButton(Button *, Text);
+TextButton changeTextButton(TextButton *, Text);
 void drawTextButton(TextButton *);
+
+Text makeText(const char *, int, Color);
 
 // Generic functions
 Button setButtonBounds(Button *, Vector4);
