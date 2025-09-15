@@ -23,24 +23,34 @@ void drawButton(Button *button) {
 // TextButton Struct Functions
 TextButton makeTextButton(Button *button, Text text) {
   TextButton tButton;
+  int padding;
   tButton.button = *button;
-  tButton.textButton = text;
-  tButton.textButton.textWidth =
-      MeasureText(tButton.textButton.text, tButton.textButton.fontSize);
+  tButton.textContent = text;
+  padding = tButton.textContent.fontSize / 2;
+  tButton.textContent.textWidth =
+      MeasureText(tButton.textContent.text, tButton.textContent.fontSize);
+  tButton.button.Bounds.width =
+      tButton.textContent.textWidth + (int)(text.fontSize / 2);
+  tButton.button.Bounds.height =
+      tButton.textContent.fontSize; // fontSize ≈ height
   return tButton;
 }
-/*
-TextButton changeTextButton(TextButton *button, const char *newText) {
-  button->text = newText;
-  button->
-  return button;
+
+TextButton changeTextButton(TextButton *button, Text newText) {
+  *button = makeTextButton(&button->button, newText);
+  return *button;
 }
-*/
+
 void drawTextButton(TextButton *tButton) {
+  int textX =
+      tButton->button.Bounds.x +
+      (tButton->button.Bounds.width - tButton->textContent.textWidth) / 2;
+  int textY =
+      tButton->button.Bounds.y +
+      (tButton->button.Bounds.height - tButton->textContent.fontSize) / 2;
   drawButton(&tButton->button);
-  DrawText(tButton->textButton.text, tButton->button.Bounds.x,
-           tButton->button.Bounds.y, tButton->textButton.fontSize,
-           tButton->textButton.textColor);
+  DrawText(tButton->textContent.text, textX, textY,
+           tButton->textContent.fontSize, tButton->textContent.textColor);
 }
 
 Text makeText(const char *text, int fontSize, Color color) {

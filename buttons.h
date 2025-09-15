@@ -4,7 +4,6 @@
 #define BUTTONS_H
 
 typedef struct Button {
-  // float posX, posY, width, height;
   Rectangle Bounds;
   Color color;
 } Button;
@@ -21,7 +20,7 @@ typedef struct Text {
 
 typedef struct TextButton {
   Button button;
-  Text textButton;
+  Text textContent;
 } TextButton;
 
 TextButton makeTextButton(Button *, Text);
