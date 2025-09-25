@@ -4,34 +4,43 @@
 #define BUTTONS_H
 
 typedef struct Button {
-  Rectangle Bounds;
+  Rectangle bounds;
   Color color;
 } Button;
 
-Button makeButton(Button *, Vector4, Color);
+Button *makeButton(Button *, Vector4, Color);
+void setButtonBounds(Button *, Vector4);
+void setButtonColor(Button *, Color);
 void drawButton(Button *);
 
 typedef struct Text {
   const char *text;
   int fontSize;
   int textWidth;
+  int posX;
+  int posY;
   Color textColor;
 } Text;
+
+Text makeText(const char *, int, Color);
 
 typedef struct TextButton {
   Button button;
   Text textContent;
 } TextButton;
 
-TextButton makeTextButton(Button *, Text);
-TextButton changeTextButton(TextButton *, Text);
+TextButton *makeTextButton(TextButton *, Button *, Text);
+TextButton *changeTextButton(TextButton *, Text);
+void changeTextColor(TextButton *, Color);
 void drawTextButton(TextButton *);
 
-Text makeText(const char *, int, Color);
+typedef struct textureButton {
+  Button button;
+  Texture2D sprite;
+} textureButton;
 
-// Generic functions
-Button setButtonBounds(Button *, Vector4);
-Button setButtonColor(Button *, Color);
-void inputButton(Button *);
+// Input functions
+bool inputButton(Button *);
+bool inputTextButton(TextButton *);
 
-#endif // BUTTONS_H
+#endif  // BUTTONS_H
