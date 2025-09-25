@@ -77,6 +77,7 @@ void drawTextButton(TextButton *tButton) {
            text->fontSize, text->textColor);
 }
 
+// Text Struct Functions
 Text makeText(const char *text, int fontSize, Color color) {
   Text objText;
   objText.text = text;
@@ -86,6 +87,41 @@ Text makeText(const char *text, int fontSize, Color color) {
   return objText;
 }
 
+TextureButton *makeResizedTextureButton(TextureButton *tButton, Button *button, Image image, Vector2 size) {
+  tButton->button = *button;
+  tButton->sprite = LoadTextureFromImage(image);
+  if (size.x != 0 && size.y != 0) {
+    resizeTextureButton(tButton, size);
+  }
+  return tButton;
+}
+
+void resizeTextureButton(TextureButton *tButton, Vector2 newSize) {
+  Button *buttonRef = &tButton->button;
+  setButtonBounds(buttonRef,
+                  (Vector4){buttonRef->bounds.x, buttonRef->bounds.y, newSize.x, newSize.y});
+  if (tButton->sprite.id != 0) {
+    Image image = LoadImageFromTexture(tButton->sprite);
+    UnloadTexture(tButton->sprite);
+    ImageResize(&image, newSize.x, newSize.y);
+    tButton->sprite = LoadTextureFromImage(image);
+    UnloadImage(image);
+  }
+}
+
+void UnloadTextureButton(TextureButton *tButton) {
+  if (tButton->sprite.id != 0) {
+    UnloadTexture(tButton->sprite);
+    tButton->sprite.id = 0;
+  }
+}
+void DrawTextureButton(TextureButton *tButton) {
+  Button *button = &(tButton->button);
+  Rectangle *bounds = &(tButton->button.bounds);
+  Texture2D *texture = &(tButton->sprite);
+  drawButton(button);
+  DrawTexture(*texture, button->bounds.x, button->bounds.y, WHITE);
+}
 // Input Button Functions
 bool inputButton(Button *button) {
   if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
@@ -97,4 +133,14 @@ bool inputButton(Button *button) {
 
 bool inputTextButton(TextButton *tButton) {
   return inputButton(&tButton->button);
+}
+
+// Aux functions
+
+Vector2 WidthHeight(int width, int height) {
+  return (Vector2){width, height};
+}
+
+Vector4 RectangleBounds(int x, int y, int width, int height) {
+  return (Vector4){x, y, width, height};
 }

@@ -34,13 +34,22 @@ TextButton *changeTextButton(TextButton *, Text);
 void changeTextColor(TextButton *, Color);
 void drawTextButton(TextButton *);
 
-typedef struct textureButton {
+typedef struct TextureButton {
   Button button;
   Texture2D sprite;
-} textureButton;
+} TextureButton;
+
+TextureButton *makeResizedTextureButton(TextureButton *, Button *, Image, Vector2);
+void resizeTextureButton(TextureButton *, Vector2);
+void UnloadTextureButton(TextureButton *tButton);
+void DrawTextureButton(TextureButton *tButton);
 
 // Input functions
 bool inputButton(Button *);
 bool inputTextButton(TextButton *);
+
+// Aux functions
+Vector2 WidthHeight(int, int);
+Vector4 RectangleBounds(int, int, int, int);
 
 #endif  // BUTTONS_H
