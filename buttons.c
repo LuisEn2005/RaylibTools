@@ -41,8 +41,10 @@ int setPadding(TextButton *tButton, Text *txt) {
 void fitButtonToText(TextButton *tButton, int padding, Text *txt, Rectangle *bounds) {
   float width = txt->textWidth + padding;
   float height = txt->fontSize;  // fontSize ≈ height
+  float centerX = bounds->x + bounds->width / 2;
+  float centerY = bounds->y + bounds->height / 2;
   setButtonBounds(&tButton->button,
-                  RectangleBounds(bounds->x + bounds->width / 2, bounds->y + bounds->height / 2, width, height));
+                  RectangleBounds(centerX, centerY, width, height));
 }
 
 void centerTextInButton(TextButton *tButton, Text *txt, Rectangle *bounds) {
@@ -100,8 +102,10 @@ TextureButton *makeResizedTextureButton(TextureButton *tButton, Button *button, 
 
 void resizeTextureButton(TextureButton *tButton, Vector2 newSize) {
   Button *buttonRef = &tButton->button;
-  setButtonBounds(buttonRef,
-                  (Vector4){buttonRef->bounds.x, buttonRef->bounds.y, newSize.x, newSize.y});
+  Rectangle *bounds = &tButton->button.bounds;
+  float centerX = bounds->x + bounds->width / 2;
+  float centerY = bounds->y + bounds->height / 2;
+  setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, newSize.x, newSize.y));
   if (tButton->sprite.id != 0) {
     Image image = LoadImageFromTexture(tButton->sprite);
     UnloadTexture(tButton->sprite);

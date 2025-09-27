@@ -18,7 +18,7 @@ int main(void) {
     ClearBackground(RAYWHITE);
     inputTextButton(&button2);
     drawTextButton(&button2);
-    // DrawTextureButton(&button3);
+    DrawTextureButton(&button3);
     EndDrawing();
   }
 
