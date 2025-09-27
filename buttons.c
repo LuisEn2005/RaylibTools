@@ -39,8 +39,10 @@ int setPadding(TextButton *tButton, Text *txt) {
 }
 
 void fitButtonToText(TextButton *tButton, int padding, Text *txt, Rectangle *bounds) {
-  bounds->width = txt->textWidth + padding;
-  bounds->height = txt->fontSize;  // fontSize ≈ height
+  float width = txt->textWidth + padding;
+  float height = txt->fontSize;  // fontSize ≈ height
+  setButtonBounds(&tButton->button,
+                  RectangleBounds(bounds->x + bounds->width / 2, bounds->y + bounds->height / 2, width, height));
 }
 
 void centerTextInButton(TextButton *tButton, Text *txt, Rectangle *bounds) {
