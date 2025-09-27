@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include <stdio.h>
 
 #include "buttons.h"
 
@@ -10,16 +11,16 @@ int main(void) {
   makeButton(&button1, RectangleBounds(400, 300, 60, 100), RED);
   InitWindow(800, 600, "ButtonsRaylib");
   SetTargetFPS(60);
-  TextButtonFromButton(&button2, &button1, makeText("NewText", 50, BLUE));
-  changeTextButton(&button2, makeText("NewText", 25, GRAY));
+  // TextButtonFromButton(&button2, &button1, makeText("NewText", 50, BLUE));
+  MakeTextButton(&button2, RectangleBounds(400, 300, 60, 100), makeText("NewText", 50, BLUE), RED);
+  // changeTextButton(&button2, makeText("NewText", 25, GRAY));
   // TextureButtonFromButton(&button3, &button1, "./infopisco.jpeg", WidthHeight(-10, -10));
-  MakeTextureButton(&button3, RectangleBounds(400, 300, 400, 600), "./infopisco.jpeg");
+  MakeTextureButton(&button3, RectangleBounds(200, 300, 200, 300), "./VictorTurnick.png");
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    inputTextButton(&button2);
-    drawTextButton(&button2);
-    DrawTextureButton(&button3);
+    if (HandleTextureButton(&button3)) printf("Waza\n");
+    if (HandleTextButton(&button2)) printf("Waza\n");
     EndDrawing();
   }
 

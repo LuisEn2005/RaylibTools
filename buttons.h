@@ -31,6 +31,7 @@ typedef struct TextButton {
 } TextButton;
 
 TextButton *TextButtonFromButton(TextButton *, Button *, Text);
+TextButton *MakeTextButton(TextButton *, Rectangle, Text, Color);
 TextButton *changeTextButton(TextButton *, Text);
 void changeTextColor(TextButton *, Color);
 void drawTextButton(TextButton *);
@@ -49,9 +50,13 @@ void DrawTextureButton(TextureButton *tButton);
 // Input functions
 bool inputButton(Button *);
 bool inputTextButton(TextButton *);
+bool inputTextureButton(TextureButton *);
 
 // Aux functions
 Vector2 WidthHeight(int, int);
 Rectangle RectangleBounds(int, int, int, int);
+bool HandleButton(Button *);
+bool HandleTextButton(TextButton *);
+bool HandleTextureButton(TextureButton *);
 
 #endif  // BUTTONS_H

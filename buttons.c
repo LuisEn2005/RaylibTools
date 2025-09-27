@@ -72,6 +72,12 @@ TextButton *TextButtonFromButton(TextButton *tButton, Button *button, Text text)
   return tButton;
 }
 
+TextButton *MakeTextButton(TextButton *tButton, Rectangle rBounds, Text text, Color bgColor) {
+  Button button = setButton(rBounds, bgColor);
+  TextButtonFromButton(tButton, &button, text);
+  return tButton;
+}
+
 TextButton *changeTextButton(TextButton *tButton, Text newText) {
   Button *button = &(tButton->button);
   TextButtonFromButton(tButton, button, newText);
@@ -160,6 +166,10 @@ bool inputTextButton(TextButton *tButton) {
   return inputButton(&tButton->button);
 }
 
+bool inputTextureButton(TextureButton *tButton) {
+  return inputButton(&tButton->button);
+}
+
 // Aux functions
 
 Vector2 WidthHeight(int width, int height) {
@@ -168,4 +178,19 @@ Vector2 WidthHeight(int width, int height) {
 
 Rectangle RectangleBounds(int x, int y, int width, int height) {
   return (Rectangle){x, y, width, height};
+}
+
+bool HandleButton(Button *button) {
+  drawButton(button);
+  return inputButton(button);
+}
+
+bool HandleTextButton(TextButton *tButton) {
+  drawTextButton(tButton);
+  return inputTextButton(tButton);
+}
+
+bool HandleTextureButton(TextureButton *tButton) {
+  DrawTextureButton(tButton);
+  return inputTextureButton(tButton);
 }
