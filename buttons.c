@@ -43,8 +43,7 @@ void fitButtonToText(TextButton *tButton, int padding, Text *txt, Rectangle *bou
   float height = txt->fontSize;  // fontSize ≈ height
   float centerX = bounds->x + bounds->width / 2;
   float centerY = bounds->y + bounds->height / 2;
-  setButtonBounds(&tButton->button,
-                  RectangleBounds(centerX, centerY, width, height));
+  setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, width, height));
 }
 
 void centerTextInButton(TextButton *tButton, Text *txt, Rectangle *bounds) {
@@ -53,7 +52,7 @@ void centerTextInButton(TextButton *tButton, Text *txt, Rectangle *bounds) {
 }
 
 // TextButton Struct Functions
-TextButton *makeTextButton(TextButton *tButton, Button *button, Text text) {
+TextButton *TextButtonFromButton(TextButton *tButton, Button *button, Text text) {
   Text *txt = &tButton->textContent;
   Rectangle *bounds = &tButton->button.bounds;
 
@@ -69,7 +68,7 @@ TextButton *makeTextButton(TextButton *tButton, Button *button, Text text) {
 
 TextButton *changeTextButton(TextButton *tButton, Text newText) {
   Button *button = &(tButton->button);
-  makeTextButton(tButton, button, newText);
+  TextButtonFromButton(tButton, button, newText);
   return tButton;
 }
 
@@ -77,8 +76,7 @@ void drawTextButton(TextButton *tButton) {
   Button *button = &(tButton->button);
   Text *text = &(tButton->textContent);
   drawButton(button);
-  DrawText(text->text, text->posX, text->posY,
-           text->fontSize, text->textColor);
+  DrawText(text->text, text->posX, text->posY, text->fontSize, text->textColor);
 }
 
 // Text Struct Functions
@@ -91,11 +89,20 @@ Text makeText(const char *text, int fontSize, Color color) {
   return objText;
 }
 
-TextureButton *makeResizedTextureButton(TextureButton *tButton, Button *button, Image image, Vector2 size) {
+TextureButton *TextureButtonFromButton(TextureButton *tButton, Button *button, const char *fileSource, Vector2 size) {
   tButton->button = *button;
+  Image image = LoadImage(fileSource);
   tButton->sprite = LoadTextureFromImage(image);
+  UnloadImage(image);
   if (size.x != 0 && size.y != 0) {
     resizeTextureButton(tButton, size);
+  } else {
+    Rectangle *bounds = &tButton->button.bounds;
+    Button *btn = &tButton->button;
+    Texture2D *sprite = &tButton->sprite;
+    float centerX = bounds->x + bounds->width / 2;
+    float centerY = bounds->y + bounds->height / 2;
+    setButtonBounds(btn, RectangleBounds(centerX, centerY, sprite->width, sprite->height));
   }
   return tButton;
 }

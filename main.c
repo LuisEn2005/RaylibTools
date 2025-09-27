@@ -7,12 +7,12 @@ TextButton button2;
 TextureButton button3;
 
 int main(void) {
-  makeButton(&button1, RectangleBounds(200, 300, 60, 100), RED);
+  makeButton(&button1, RectangleBounds(270, 585, 60, 100), RED);
   InitWindow(800, 600, "ButtonsRaylib");
   SetTargetFPS(60);
-  makeTextButton(&button2, &button1, makeText("asfanfijafjafjabifabwo", 50, BLUE));
-  changeTextButton(&button2, makeText("NewText", 25, GRAY));
-  makeResizedTextureButton(&button3, &button1, LoadImage("./infopisco.jpeg"), WidthHeight(100, 200));
+  TextButtonFromButton(&button2, &button1, makeText("NewText", 50, BLUE));
+  // changeTextButton(&button2, makeText("NewText", 25, GRAY));
+  TextureButtonFromButton(&button3, &button1, "./infopisco.jpeg", WidthHeight(0, 0));
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(RAYWHITE);
