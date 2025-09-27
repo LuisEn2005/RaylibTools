@@ -8,8 +8,9 @@ typedef struct Button {
   Color color;
 } Button;
 
-Button *makeButton(Button *, Vector4, Color);
-void setButtonBounds(Button *, Vector4);
+Button *makeButton(Button *, Rectangle, Color);
+Button setButton(Rectangle, Color);
+void setButtonBounds(Button *, Rectangle);
 void setButtonColor(Button *, Color);
 void drawButton(Button *);
 
@@ -40,7 +41,7 @@ typedef struct TextureButton {
 } TextureButton;
 
 TextureButton *TextureButtonFromButton(TextureButton *, Button *, const char *, Vector2);
-TextureButton *MakeTextureButton(TextureButton *, const char *, Vector2);
+TextureButton *MakeTextureButton(TextureButton *, Rectangle, const char *);
 void resizeTextureButton(TextureButton *, Vector2);
 void UnloadTextureButton(TextureButton *tButton);
 void DrawTextureButton(TextureButton *tButton);
@@ -51,6 +52,6 @@ bool inputTextButton(TextButton *);
 
 // Aux functions
 Vector2 WidthHeight(int, int);
-Vector4 RectangleBounds(int, int, int, int);
+Rectangle RectangleBounds(int, int, int, int);
 
 #endif  // BUTTONS_H

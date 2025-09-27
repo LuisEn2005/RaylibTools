@@ -10,15 +10,21 @@ Color RandomColor(void) {
 }
 
 // Button Struct Functions
-Button *makeButton(Button *button, Vector4 bounds, Color _color) {
+Button *makeButton(Button *button, Rectangle bounds, Color color) {
   setButtonBounds(button, bounds);
-  setButtonColor(button, _color);
+  setButtonColor(button, color);
   return button;
 }
 
-void setButtonBounds(Button *button, Vector4 vBounds) {
+Button setButton(Rectangle bounds, Color color) {
+  Button button;
+  makeButton(&button, bounds, color);
+  return button;
+}
+
+void setButtonBounds(Button *button, Rectangle vBounds) {
   Rectangle *bounds = &(button->bounds);
-  *bounds = (Rectangle){vBounds.x, vBounds.y, vBounds.z, vBounds.w};
+  *bounds = (Rectangle){vBounds.x, vBounds.y, vBounds.width, vBounds.height};
   bounds->x -= bounds->width / 2;
   bounds->y -= bounds->height / 2;
 }
@@ -107,6 +113,12 @@ TextureButton *TextureButtonFromButton(TextureButton *tButton, Button *button, c
   return tButton;
 }
 
+TextureButton *MakeTextureButton(TextureButton *tButton, Rectangle rBounds, const char *fileSource) {
+  Button button = setButton(rBounds, BLANK);
+  TextureButtonFromButton(tButton, &button, fileSource, (Vector2){button.bounds.width, button.bounds.height});
+  return tButton;
+}
+
 void resizeTextureButton(TextureButton *tButton, Vector2 newSize) {
   Button *buttonRef = &tButton->button;
   Rectangle *bounds = &tButton->button.bounds;
@@ -154,6 +166,6 @@ Vector2 WidthHeight(int width, int height) {
   return (Vector2){width, height};
 }
 
-Vector4 RectangleBounds(int x, int y, int width, int height) {
-  return (Vector4){x, y, width, height};
+Rectangle RectangleBounds(int x, int y, int width, int height) {
+  return (Rectangle){x, y, width, height};
 }
