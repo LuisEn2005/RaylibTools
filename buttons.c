@@ -10,10 +10,9 @@ Color RandomColor(void) {
 }
 
 // Button Struct Functions
-Button *makeButton(Button *button, Rectangle bounds, Color color) {
+void makeButton(Button *button, Rectangle bounds, Color color) {
   setButtonBounds(button, bounds);
   setButtonColor(button, color);
-  return button;
 }
 
 Button setButton(Rectangle bounds, Color color) {
@@ -58,7 +57,7 @@ void centerTextInButton(TextButton *tButton, Text *txt, Rectangle *bounds) {
 }
 
 // TextButton Struct Functions
-TextButton *TextButtonFromButton(TextButton *tButton, Button *button, Text text) {
+void TextButtonFromButton(TextButton *tButton, Button *button, Text text) {
   Text *txt = &tButton->textContent;
   Rectangle *bounds = &tButton->button.bounds;
 
@@ -68,20 +67,16 @@ TextButton *TextButtonFromButton(TextButton *tButton, Button *button, Text text)
   int padding = setPadding(tButton, txt);
   fitButtonToText(tButton, padding, txt, bounds);
   centerTextInButton(tButton, txt, bounds);
-
-  return tButton;
 }
 
-TextButton *MakeTextButton(TextButton *tButton, Rectangle rBounds, Text text, Color bgColor) {
+void MakeTextButton(TextButton *tButton, Rectangle rBounds, Text text, Color bgColor) {
   Button button = setButton(rBounds, bgColor);
   TextButtonFromButton(tButton, &button, text);
-  return tButton;
 }
 
-TextButton *changeTextButton(TextButton *tButton, Text newText) {
+void changeTextButton(TextButton *tButton, Text newText) {
   Button *button = &(tButton->button);
   TextButtonFromButton(tButton, button, newText);
-  return tButton;
 }
 
 void drawTextButton(TextButton *tButton) {
@@ -101,7 +96,7 @@ Text makeText(const char *text, int fontSize, Color color) {
   return objText;
 }
 
-TextureButton *TextureButtonFromButton(TextureButton *tButton, Button *button, const char *fileSource, Vector2 size) {
+void TextureButtonFromButton(TextureButton *tButton, Button *button, const char *fileSource, Vector2 size) {
   tButton->button = *button;
   Image image = LoadImage(fileSource);
   tButton->sprite = LoadTextureFromImage(image);
@@ -116,13 +111,11 @@ TextureButton *TextureButtonFromButton(TextureButton *tButton, Button *button, c
     float centerY = bounds->y + bounds->height / 2;
     setButtonBounds(btn, RectangleBounds(centerX, centerY, sprite->width, sprite->height));
   }
-  return tButton;
 }
 
-TextureButton *MakeTextureButton(TextureButton *tButton, Rectangle rBounds, const char *fileSource) {
+void MakeTextureButton(TextureButton *tButton, Rectangle rBounds, const char *fileSource) {
   Button button = setButton(rBounds, BLANK);
   TextureButtonFromButton(tButton, &button, fileSource, (Vector2){button.bounds.width, button.bounds.height});
-  return tButton;
 }
 
 void resizeTextureButton(TextureButton *tButton, Vector2 newSize) {
