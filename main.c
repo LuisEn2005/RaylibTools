@@ -1,7 +1,9 @@
 #include <raylib.h>
 #include <stdio.h>
 
-#include "buttons.h"
+#include "button.h"
+#include "textbutton.h"
+#include "texturebutton.h"
 
 Button button1;
 TextButton button2;
