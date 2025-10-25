@@ -36,8 +36,8 @@ void resizeTextureButton(TextureButton *tButton, Vector2 newSize) {
       ImageFlipHorizontal(&image);
       ImageFlipVertical(&image);
     } else if (newSize.x < 0 || newSize.y < 0) {
-      newSize.x < 0 ? (newSize.x *= -1) : (newSize.y *= -1);
       newSize.x < 0 ? ImageFlipHorizontal(&image) : ImageFlipVertical(&image);
+      newSize.x < 0 ? (newSize.x *= -1) : (newSize.y *= -1);
     }
     setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, newSize.x, newSize.y));
     ImageResize(&image, newSize.x, newSize.y);
