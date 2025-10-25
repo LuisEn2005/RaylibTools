@@ -17,7 +17,7 @@ int main(void) {
   MakeTextButton(&button2, RectangleBounds(400, 300, 60, 100), makeText("NewText", 50, BLUE), RED);
   // changeTextButton(&button2, makeText("NewText", 25, GRAY));
   // TextureButtonFromButton(&button3, &button1, "./infopisco.jpeg", WidthHeight(-10, -10));
-  MakeTextureButton(&button3, RectangleBounds(200, 300, 200, 300), "./VictorTurnick.png");
+  MakeTextureButton(&button3, RectangleBounds(200, 300, -200, -300), "./VictorTurnick.png");
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(RAYWHITE);

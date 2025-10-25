@@ -26,10 +26,20 @@ void resizeTextureButton(TextureButton *tButton, Vector2 newSize) {
   Rectangle *bounds = &tButton->button.bounds;
   float centerX = bounds->x + bounds->width / 2;
   float centerY = bounds->y + bounds->height / 2;
-  setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, newSize.x, newSize.y));
+
   if (tButton->sprite.id != 0) {
     Image image = LoadImageFromTexture(tButton->sprite);
     UnloadTexture(tButton->sprite);
+    if (newSize.x < 0 && newSize.y < 0) {
+      newSize.x *= -1;
+      newSize.y *= -1;
+      ImageFlipHorizontal(&image);
+      ImageFlipVertical(&image);
+    } else if (newSize.x < 0 || newSize.y < 0) {
+      newSize.x < 0 ? (newSize.x *= -1) : (newSize.y *= -1);
+      newSize.x < 0 ? ImageFlipHorizontal(&image) : ImageFlipVertical(&image);
+    }
+    setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, newSize.x, newSize.y));
     ImageResize(&image, newSize.x, newSize.y);
     tButton->sprite = LoadTextureFromImage(image);
     UnloadImage(image);
