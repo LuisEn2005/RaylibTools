@@ -1,20 +1,10 @@
 #include <raylib.h>
 
+#include "../utils/text.h"
 #include "button.h"
 
 #ifndef TEXTBUTTON_H
 #define TEXTBUTTON_H
-
-typedef struct Text {
-  const char *text;
-  int fontSize;
-  int textWidth;
-  int posX;
-  int posY;
-  Color textColor;
-} Text;
-
-Text makeText(const char *, int, Color);
 
 typedef struct TextButton {
   Button button;

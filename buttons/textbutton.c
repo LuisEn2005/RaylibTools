@@ -54,16 +54,6 @@ void DrawTextButton(TextButton *tButton) {
   DrawText(text->text, text->posX, text->posY, text->fontSize, text->textColor);
 }
 
-// Text Struct Functions
-Text makeText(const char *text, int fontSize, Color color) {
-  Text objText;
-  objText.text = text;
-  objText.fontSize = fontSize;
-  objText.textWidth = MeasureText(text, fontSize);
-  objText.textColor = color;
-  return objText;
-}
-
 bool InputTextButton(TextButton *tButton) {
   return inputButton(&tButton->button);
 }

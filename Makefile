@@ -6,7 +6,9 @@ SRC = main.c button.c textbutton.c texturebutton.c
 SRC = main.c \
       buttons/button.c \
       buttons/textbutton.c \
-      buttons/texturebutton.c
+      buttons/texturebutton.c \
+			scene/scene.c\
+			utils/text.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -9,9 +9,16 @@
 Button button1;
 TextButton button2;
 TextureButton button3;
+Scene logo, mainmenu, options;
+enum scenesidx { LOGO,
+                 MAINMENU,
+                 OPTIONS };
 
 int main(void) {
+  Scene scenes[3] = {logo, mainmenu, options};
   makeButton(&button1, RectangleBounds(400, 300, 60, 100), RED);
+  // MakeScene(&mainmenu);
+  // MakeScene(&options);
   InitWindow(800, 600, "ButtonsRaylib");
   SetTargetFPS(60);
   MakeTextButton(&button2, RectangleBounds(400, 300, 60, 100), makeText("NewText", 50, BLUE), RED);
