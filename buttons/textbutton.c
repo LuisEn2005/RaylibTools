@@ -1,7 +1,7 @@
 #include "textbutton.h"
 
 // aux functions for makeTextButton
-int setPadding(TextButton *tButton, Text *txt) {
+int setPadding(Text *txt) {
   int padding = txt->fontSize / 2;
   txt->textWidth = MeasureText(txt->text, txt->fontSize);
   return padding;
@@ -15,7 +15,7 @@ void fitButtonToText(TextButton *tButton, int padding, Text *txt, Rectangle *bou
   setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, width, height));
 }
 
-void centerTextInButton(TextButton *tButton, Text *txt, Rectangle *bounds) {
+void centerTextInButton(Text *txt, Rectangle *bounds) {
   txt->posX = bounds->x + (bounds->width - txt->textWidth) / 2;
   txt->posY = bounds->y + (bounds->height - txt->fontSize) / 2;
 }
@@ -28,9 +28,9 @@ void TextButtonFromButton(TextButton *tButton, Button *button, Text text) {
   tButton->button = *button;
   *txt = text;
 
-  int padding = setPadding(tButton, txt);
+  int padding = setPadding(txt);
   fitButtonToText(tButton, padding, txt, bounds);
-  centerTextInButton(tButton, txt, bounds);
+  centerTextInButton(txt, bounds);
 }
 
 void MakeTextButton(TextButton *tButton, Rectangle rBounds, Text text, Color bgColor) {
