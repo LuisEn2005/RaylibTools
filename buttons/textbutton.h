@@ -11,7 +11,6 @@ typedef struct TextButton {
   Text textContent;
 } TextButton;
 
-void TextButtonFromButton(TextButton *, Button *, Text);
 void MakeTextButton(TextButton *, Rectangle, Text, Color);
 void ChangeTextButton(TextButton *, Text);
 void ChangeTextColor(TextButton *, Color);
