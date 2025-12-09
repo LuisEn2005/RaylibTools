@@ -33,6 +33,11 @@ void TextButtonFromButton(TextButton *tButton, Button *button, Text text) {
   centerTextInButton(txt, bounds);
 }
 
+void MakeInputText(TextButton *ITButton, Rectangle rBounds, Text text) {
+  Button button = setButton(rBounds, (Color){100, 100, 100, 125});
+  TextButtonFromButton(ITButton, &button, text);
+}
+
 void MakeTextButton(TextButton *tButton, Rectangle rBounds, Text text, Color bgColor) {
   Button button = setButton(rBounds, bgColor);
   TextButtonFromButton(tButton, &button, text);
@@ -56,9 +61,4 @@ void DrawTextButton(TextButton *tButton) {
 
 bool InputTextButton(TextButton *tButton) {
   return inputButton(&tButton->button);
-}
-
-bool HandleTextButton(TextButton *tButton) {
-  DrawTextButton(tButton);
-  return InputTextButton(tButton);
 }

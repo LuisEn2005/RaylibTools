@@ -1,7 +1,7 @@
-#include <raylib.h>
+#ifndef TEXT_H
+#define TEXT_H
 
-#ifndef UTILS_H
-#define UTILS_H
+#include <raylib.h>
 
 typedef struct Text {
   const char *text;
