@@ -6,7 +6,7 @@
 #define TEXTURE_BUTTON_H
 
 typedef struct TextureButton {
-  Button button;
+  Button base;
   Texture2D sprite;
 } TextureButton;
 

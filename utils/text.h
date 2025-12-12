@@ -2,6 +2,7 @@
 #define TEXT_H
 
 #include <raylib.h>
+#include <string.h>
 
 typedef struct Text {
   const char *text;

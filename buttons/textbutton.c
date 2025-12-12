@@ -12,7 +12,7 @@ void fitButtonToText(TextButton *tButton, int padding, Text *txt, Rectangle *bou
   float height = txt->fontSize;  // fontSize ≈ height
   float centerX = bounds->x + bounds->width / 2;
   float centerY = bounds->y + bounds->height / 2;
-  setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, width, height));
+  setButtonBounds(&tButton->base, RectangleBounds(centerX, centerY, width, height));
 }
 
 void centerTextInButton(Text *txt, Rectangle *bounds) {
@@ -21,11 +21,11 @@ void centerTextInButton(Text *txt, Rectangle *bounds) {
 }
 
 // TextButton Struct Functions
-void TextButtonFromButton(TextButton *tButton, Button *button, Text text) {
+void TextButtonFromButton(TextButton *tButton, Button *base, Text text) {
   Text *txt = &tButton->textContent;
-  Rectangle *bounds = &tButton->button.bounds;
+  Rectangle *bounds = &tButton->base.bounds;
 
-  tButton->button = *button;
+  tButton->base = *base;
   *txt = text;
 
   int padding = setPadding(txt);
@@ -34,18 +34,18 @@ void TextButtonFromButton(TextButton *tButton, Button *button, Text text) {
 }
 
 void MakeInputText(TextButton *ITButton, Rectangle rBounds, Text text) {
-  Button button = setButton(rBounds, (Color){100, 100, 100, 125});
-  TextButtonFromButton(ITButton, &button, text);
+  Button base = setButton(rBounds, (Color){100, 100, 100, 125});
+  TextButtonFromButton(ITButton, &base, text);
 }
 
 void MakeTextButton(TextButton *tButton, Rectangle rBounds, Text text, Color bgColor) {
-  Button button = setButton(rBounds, bgColor);
-  TextButtonFromButton(tButton, &button, text);
+  Button base = setButton(rBounds, bgColor);
+  TextButtonFromButton(tButton, &base, text);
 }
 
 void ChangeTextButton(TextButton *tButton, Text newText) {
-  Button *button = &(tButton->button);
-  TextButtonFromButton(tButton, button, newText);
+  Button *base = &(tButton->base);
+  TextButtonFromButton(tButton, base, newText);
 }
 
 void ChangeTextColor(TextButton *tButton, Color color) {
@@ -53,12 +53,12 @@ void ChangeTextColor(TextButton *tButton, Color color) {
 }
 
 void DrawTextButton(TextButton *tButton) {
-  Button *button = &(tButton->button);
+  Button *base = &(tButton->base);
   Text *text = &(tButton->textContent);
-  drawButton(button);
+  drawButton(base);
   DrawText(text->text, text->posX, text->posY, text->fontSize, text->textColor);
 }
 
 bool InputTextButton(TextButton *tButton) {
-  return inputButton(&tButton->button);
+  return inputButton(&tButton->base);
 }
