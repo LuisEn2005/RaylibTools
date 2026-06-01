@@ -1,10 +1,11 @@
-#include <raylib.h>
+#ifndef TEXT_H
+#define TEXT_H
 
-#ifndef UTILS_H
-#define UTILS_H
+#include <raylib.h>
+#include <string.h>
 
 typedef struct Text {
-  const char *text;
+  char text[256];
   int fontSize;
   int textWidth;
   int posX;
@@ -12,6 +13,6 @@ typedef struct Text {
   Color textColor;
 } Text;
 
-Text makeText(const char *, int, Color);
+Text MakeText(const char *, int, Color);
 
 #endif  // UTILS_H

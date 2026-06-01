@@ -12,7 +12,7 @@ void fitButtonToText(TextButton *tButton, int padding, Text *txt, Rectangle *bou
   float height = txt->fontSize;  // fontSize ≈ height
   float centerX = bounds->x + bounds->width / 2;
   float centerY = bounds->y + bounds->height / 2;
-  setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, width, height));
+  SetButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, width, height));
 }
 
 void centerTextInButton(TextButton *tButton, Text *txt, Rectangle *bounds) {
@@ -34,7 +34,7 @@ void TextButtonFromButton(TextButton *tButton, Button *button, Text text) {
 }
 
 void MakeTextButton(TextButton *tButton, Rectangle rBounds, Text text, Color bgColor) {
-  Button button = setButton(rBounds, bgColor);
+  Button button = SetButton(rBounds, bgColor);
   TextButtonFromButton(tButton, &button, text);
 }
 
@@ -50,15 +50,16 @@ void ChangeTextColor(TextButton *tButton, Color color) {
 void DrawTextButton(TextButton *tButton) {
   Button *button = &(tButton->button);
   Text *text = &(tButton->textContent);
-  drawButton(button);
+  DrawButton(button);
   DrawText(text->text, text->posX, text->posY, text->fontSize, text->textColor);
 }
 
 bool InputTextButton(TextButton *tButton) {
-  return inputButton(&tButton->button);
+  return InputButton(&tButton->button);
 }
 
 bool HandleTextButton(TextButton *tButton) {
   DrawTextButton(tButton);
   return InputTextButton(tButton);
 }
+

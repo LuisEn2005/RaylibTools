@@ -1,21 +1,23 @@
-#include <raylib.h>
-
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include <raylib.h>
+
 typedef struct Button {
   Rectangle bounds;
-  Color color;
+  Color colorNormal;
+  Color colorHover;
+  Color colorPressed;
 } Button;
 
-void makeButton(Button *, Rectangle, Color);
-Button setButton(Rectangle, Color);
-void setButtonBounds(Button *, Rectangle);
-void setButtonColor(Button *, Color);
-void drawButton(Button *);
+void MakeButton(Button *, Rectangle, Color);
+Button SetButton(Rectangle, Color);
+void SetButtonBounds(Button *, Rectangle);
+void SetButtonColor(Button *, Color);
+void DrawButton(Button *);
 
 // Input functions
-bool inputButton(Button *);
+bool InputButton(Button *);
 
 // Aux functions
 Vector2 WidthHeight(int, int);

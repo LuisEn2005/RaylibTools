@@ -1,10 +1,10 @@
+#ifndef TEXTBUTTON_H
+#define TEXTBUTTON_H
+
 #include <raylib.h>
 
 #include "../utils/text.h"
 #include "button.h"
-
-#ifndef TEXTBUTTON_H
-#define TEXTBUTTON_H
 
 typedef struct TextButton {
   Button button;

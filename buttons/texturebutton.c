@@ -13,12 +13,12 @@ void TextureWithButton(TextureButton *tButton, Button *button, const char *fileS
     Texture2D *sprite = &tButton->sprite;
     float centerX = bounds->x + bounds->width / 2;
     float centerY = bounds->y + bounds->height / 2;
-    setButtonBounds(btn, RectangleBounds(centerX, centerY, sprite->width, sprite->height));
+    SetButtonBounds(btn, RectangleBounds(centerX, centerY, sprite->width, sprite->height));
   }
 }
 
 void MakeTextureButton(TextureButton *tButton, Rectangle rBounds, const char *fileSource) {
-  Button button = setButton(rBounds, BLANK);
+  Button button = SetButton(rBounds, BLANK);
   TextureWithButton(tButton, &button, fileSource, (Vector2){button.bounds.width, button.bounds.height});
 }
 
@@ -39,7 +39,8 @@ void ResizeTextureButton(TextureButton *tButton, Vector2 newSize) {
       newSize.x < 0 ? ImageFlipHorizontal(&image) : ImageFlipVertical(&image);
       newSize.x < 0 ? (newSize.x *= -1) : (newSize.y *= -1);
     }
-    setButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, newSize.x, newSize.y));
+
+    SetButtonBounds(&tButton->button, RectangleBounds(centerX, centerY, newSize.x, newSize.y));
     ImageResize(&image, newSize.x, newSize.y);
     tButton->sprite = LoadTextureFromImage(image);
     UnloadImage(image);
@@ -55,15 +56,16 @@ void UnloadTextureButton(TextureButton *tButton) {
 void DrawTextureButton(TextureButton *tButton) {
   Button *button = &(tButton->button);
   Texture2D *texture = &(tButton->sprite);
-  drawButton(button);
+  DrawButton(button);
   DrawTexture(*texture, button->bounds.x, button->bounds.y, WHITE);
 }
 
 bool inputTextureButton(TextureButton *tButton) {
-  return inputButton(&tButton->button);
+  return InputButton(&tButton->button);
 }
 
 bool HandleTextureButton(TextureButton *tButton) {
   DrawTextureButton(tButton);
   return inputTextureButton(tButton);
 }
+

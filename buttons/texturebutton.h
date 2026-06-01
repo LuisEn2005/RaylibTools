@@ -1,9 +1,9 @@
+#ifndef TEXTURE_BUTTON_H
+#define TEXTURE_BUTTON_H
+
 #include <raylib.h>
 
 #include "button.h"
-
-#ifndef TEXTURE_BUTTON_H
-#define TEXTURE_BUTTON_H
 
 typedef struct TextureButton {
   Button button;

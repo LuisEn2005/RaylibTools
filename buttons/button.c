@@ -1,6 +1,7 @@
 #include "button.h"
 
-Color RandomColor(void) {
+/*
+static Color RandomColor(void) {
   return (Color){
       GetRandomValue(0, 255),  // r
       GetRandomValue(0, 255),  // g
@@ -8,36 +9,41 @@ Color RandomColor(void) {
       255                      // alpha fijo en 255
   };
 }
+*/
 
 // Button Struct Functions
-void makeButton(Button *button, Rectangle bounds, Color color) {
-  setButtonBounds(button, bounds);
-  setButtonColor(button, color);
+void MakeButton(Button *button, Rectangle bounds, Color color) {
+  SetButtonBounds(button, bounds);
+  SetButtonColor(button, color);
 }
 
-Button setButton(Rectangle bounds, Color color) {
+Button SetButton(Rectangle bounds, Color color) {
   Button button;
-  makeButton(&button, bounds, color);
+  MakeButton(&button, bounds, color);
   return button;
 }
 
-void setButtonBounds(Button *button, Rectangle vBounds) {
+void SetButtonBounds(Button *button, Rectangle vBounds) {
   Rectangle *bounds = &(button->bounds);
   *bounds = (Rectangle){vBounds.x, vBounds.y, vBounds.width, vBounds.height};
   bounds->x -= bounds->width / 2;
   bounds->y -= bounds->height / 2;
 }
 
-void setButtonColor(Button *button, Color _color) {
-  button->color = _color;
+void SetButtonColor(Button *button, Color _color) {
+  button->colorNormal = _color;
 }
 
-void drawButton(Button *button) {
-  DrawRectangleRec(button->bounds, button->color);
+void DrawButton(Button *b) {
+  Color c = b->colorNormal;
+  if (CheckCollisionPointRec(GetMousePosition(), b->bounds)) {
+    c = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? b->colorPressed : b->colorHover;
+  }
+  DrawRectangleRec(b->bounds, c);
 }
 
 // Input Button Functions
-bool inputButton(Button *button) {
+bool InputButton(Button *button) {
   if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
       CheckCollisionPointRec(GetMousePosition(), button->bounds)) {
     return true;
@@ -56,6 +62,7 @@ Rectangle RectangleBounds(int x, int y, int width, int height) {
 }
 
 bool HandleButton(Button *button) {
-  drawButton(button);
-  return inputButton(button);
+  DrawButton(button);
+  return InputButton(button);
 }
+
