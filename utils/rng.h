@@ -10,21 +10,21 @@ typedef struct {
 } RNG;
 
 // Inicializa el generador con semilla y secuencia
-static void rng_seed(RNG *rng, uint64_t seed, uint64_t seq);
+void rng_seed(RNG *rng, uint64_t seed, uint64_t seq);
 
 // Devuelve un número aleatorio de 32 bits
-static uint32_t rng_next_u32(RNG *rng);
+uint32_t rng_next_u32(RNG *rng);
 
 // Devuelve un número entero en el rango [min, max]
-static int rng_range(RNG *rng, int min, int max);
+int rng_range(RNG *rng, int min, int max);
 
 // Devuelve un flotante en el rango [0, 1)
-static float rng_float01(RNG *rng);
+float rng_float01(RNG *rng);
 
 // Devuelve un flotante en un rango arbitrario
-static float rng_float(RNG *rng, float min, float max);
+float rng_float(RNG *rng, float min, float max);
 
 // Devuelve true o false (50/50)
-static int rng_bool(RNG *rng);
+int rng_bool(RNG *rng);
 
 #endif

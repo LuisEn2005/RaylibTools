@@ -1,6 +1,6 @@
 #include "rng.h"
 
-static inline uint32_t pcg_output(uint64_t state) {
+uint32_t pcg_output(uint64_t state) {
   uint32_t xorshifted = ((state >> 18u) ^ state) >> 27u;
   uint32_t rot = state >> 59u;
   return (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
