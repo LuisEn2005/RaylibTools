@@ -6,5 +6,6 @@
 #include "./buttons/texturebutton.h"
 #include "./utils/rng.h"
 #include "./utils/text.h"
+#include "./utils/timer.h"
 
 #endif  // RAYLIBTOOLS_H
